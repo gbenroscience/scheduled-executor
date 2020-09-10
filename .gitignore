@@ -1,7 +1,4 @@
+.gitignore
 .idea
-.idea/.name
-.idea/modules.xml
-.idea/scheduled-executor.iml
-.idea/vcs.xml
-.idea/workspace.xml
+
 

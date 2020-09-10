@@ -26,7 +26,6 @@ func NewTimedExecutor(initialDelay time.Duration, delay time.Duration) Scheduled
 //Start .. process() is the function to run periodically , runAsync detects if the function should block the executor when running or not. It blocks when false
 func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 
-	se.quit = make(chan int)
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 

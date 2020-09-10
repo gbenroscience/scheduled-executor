@@ -1,3 +1,3 @@
-module com.github.gbenroscience/scheduled-executor
+module github.com/gbenroscience/scheduled-executor
 
 go 1.14

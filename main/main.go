@@ -1,13 +1,15 @@
 package main
 
 import (
+	"com.github.gbenroscience/scheduled-executor/utils"
 	"fmt"
 	"time"
-	"com.github.gbenroscience/scheduled-executor/utils"
-
 )
 
 
+func timeStampMillis() int {
+	return int(time.Now().UnixNano() / 1000000)
+}
 
 func main()  {
 
@@ -17,7 +19,7 @@ func main()  {
 
 		utils.NewTimedExecutor(5 * time.Second , 2 * time.Second).Start(func() {
 			totalCount++
-			fmt.Printf("%d.%4stime is %d\n" ,totalCount , " ", utils.CurrentTimeStamp())
+			fmt.Printf("%d.%4stime is %d\n" ,totalCount , " ", timeStampMillis())
 		} , true)
 
 

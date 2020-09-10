@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97c17da1-fbbe-45d0-b83e-48ed9d731985" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../scheduled-executor/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduled-executor/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../scheduled-executor/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../AndroidStudio/DeviceExplorer/xiaomi-redmi_note_8-192.168.0.100_5555/data/data/com.itis.libs.liveservice/shared_prefs/SettingsFile.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../AndroidStudio/DeviceExplorer/xiaomi-redmi_note_8-192.168.0.100_5555/sdcard/Download/images (2).jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../AndroidStudio/DeviceExplorer/xiaomi-redmi_note_8-192.168.0.100_5555/sdcard/Download/images (7).jpeg" beforeDir="false" />
@@ -80,7 +83,7 @@
       <change beforePath="$PROJECT_DIR$/../dynamoney/utils/simpledate.go" beforeDir="false" afterPath="$PROJECT_DIR$/../dynamoney/utils/simpledate.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../dynamoney/utils/timedexecutor.go" beforeDir="false" afterPath="$PROJECT_DIR$/../dynamoney/utils/timedexecutor.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../dynamoney/utils/txmgr.go" beforeDir="false" afterPath="$PROJECT_DIR$/../dynamoney/utils/txmgr.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduled-executor/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/timedexecutor.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduled-executor/.idea/scheduled-executor.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduled-executor/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../scheduled-executor/.idea/workspace.xml" afterDir="false" />

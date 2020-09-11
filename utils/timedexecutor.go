@@ -55,7 +55,7 @@ func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 				se.close()
 				return
 			case <-sigs:
-				se.Stop()
+				se.Close()
 				break
 			}
 		}
@@ -64,7 +64,7 @@ func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 
 }
 
-func (se *ScheduledExecutor) Stop() {
+func (se *ScheduledExecutor) Close() {
 	go func() {
 		se.quit <- 1
 	}()

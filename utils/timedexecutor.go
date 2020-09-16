@@ -31,6 +31,7 @@ func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 
 	go func() {
 		defer func() {
+			se.close()
 			fmt.Println("Scheduler stopped!!")
 		}()
 		firstExec := true
@@ -52,7 +53,6 @@ func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 
 				break
 			case <-se.quit:
-				se.close()
 				return
 			case <-sigs:
 				_ = se.Close()

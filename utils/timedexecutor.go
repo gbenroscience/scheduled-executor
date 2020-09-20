@@ -71,6 +71,5 @@ func (se *ScheduledExecutor) Close() error {
 	return nil
 }
 func (se *ScheduledExecutor) close() {
-	close(se.quit)
 	se.ticker.Stop()
 }

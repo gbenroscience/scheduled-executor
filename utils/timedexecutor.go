@@ -14,6 +14,8 @@ type ScheduledExecutor struct {
 	quit   chan int
 }
 
+const SHUT_DOWN = 1
+
 func NewTimedExecutor(initialDelay time.Duration, delay time.Duration) ScheduledExecutor {
 	return ScheduledExecutor{
 		delay:  delay,
@@ -22,8 +24,7 @@ func NewTimedExecutor(initialDelay time.Duration, delay time.Duration) Scheduled
 	}
 }
 
-
-//Start .. process() is the function to run periodically , runAsync detects if the function should block the executor when running or not. It blocks when false
+// Start .. process() is the function to run periodically , runAsync detects if the function should block the executor when running or not. It blocks when false
 func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 
 	sigs := make(chan os.Signal, 1)
@@ -31,11 +32,13 @@ func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 
 	go func() {
 		defer func() {
+			fmt.Println("Scheduler stopping...")
 			se.close()
-			fmt.Println("Scheduler stopped!!")
+			fmt.Println("Scheduler stopped.")
 		}()
 		firstExec := true
 		for {
+			fmt.Println("IN the loop")
 			select {
 			case <-se.ticker.C:
 
@@ -50,23 +53,31 @@ func (se ScheduledExecutor) Start(task func(), runAsync bool) {
 				} else {
 					task()
 				}
+				fmt.Println("case evaluated, other cases will be ignored for now - 1")
+			case a := <-se.quit:
+				if a == SHUT_DOWN {
+					fmt.Printf("returning here - 2, a= %d\n", a)
+					return
+				}
+				fmt.Println("keep idling sweet golang - 2")
 
-				break
-			case <-se.quit:
-				return
 			case <-sigs:
-				_ = se.Close()
-				break
+				fmt.Println("AWW AWW AWW - 3")
+				fmt.Println("breaking out of select here - 3")
+				return
 			}
 		}
+		fmt.Println("OUT of the loop - 4")
 
 	}()
+	fmt.Println("OUT of goroutine - 5")
 
 }
 
 func (se *ScheduledExecutor) Close() error {
 	go func() {
-		se.quit <- 1
+		fmt.Println("Closing scheduler...")
+		se.quit <- SHUT_DOWN
 	}()
 	return nil
 }

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sync"
 	"time"
 
 	"github.com/gbenroscience/scheduled-executor/utils"
@@ -15,17 +14,31 @@ func timeStampMillis() int {
 func main() {
 
 	totalCount := 0
+	const MAX_CYCLES = 5
 
-	var wg *sync.WaitGroup = &sync.WaitGroup{}
+	sc := utils.NewTimedExecutor(2*time.Second, 500*time.Millisecond)
+
+	sc.Start(func() {
+		totalCount++
+		fmt.Printf("%d.%4stime is %d\n", totalCount, " ", timeStampMillis())
+		if totalCount > MAX_CYCLES {
+			sc.Close()
+		}
+	}, true)
+
+}
+
+/*
+func main() {
+
+	totalCount := 0
 
 	utils.NewTimedExecutor(2*time.Second, 2*time.Second).Start(func() {
 		totalCount++
 		fmt.Printf("%d.%4stime is %d\n", totalCount, " ", timeStampMillis())
-		wg.Done()
 	}, true)
 
-	wg.Add(10)
-
-	wg.Wait()
+	time.Sleep(time.Minute)
 
 }
+*/

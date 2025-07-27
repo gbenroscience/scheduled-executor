@@ -24,7 +24,13 @@ func NewTimedExecutor(initialDelay time.Duration, delay time.Duration) *Schedule
 	}
 }
 
-func (se *ScheduledExecutor) Start(task func(), runAsync bool) {
+// Start begins the execution of the task at the specified intervals.
+// If runAsync is true, the task will be executed in a separate goroutine.
+// If runAsync is false, the task will block the goroutine until it completes.
+// If startAsync is false, the executor will start asynchronously. So the caller can continue without waiting for the task to start.
+// If startAsync is false, the caller(of Start) will wait until the task starts executing.
+// The task will be stopped when the context is canceled.
+func (se *ScheduledExecutor) Start(task func(), runAsync bool, startAsync bool) {
 	se.ctx, se.cancel = context.WithCancel(context.Background())
 	se.sigs = make(chan os.Signal, 1)
 	signal.Notify(se.sigs, syscall.SIGINT, syscall.SIGTERM)
@@ -61,7 +67,9 @@ func (se *ScheduledExecutor) Start(task func(), runAsync bool) {
 		}
 	}()
 
-	<-se.ctx.Done()
+	if !startAsync {
+		<-se.ctx.Done()
+	}
 }
 
 func (se *ScheduledExecutor) Close() {

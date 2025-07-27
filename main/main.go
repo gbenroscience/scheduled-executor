@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sync"
 	"time"
 
 	"github.com/gbenroscience/scheduled-executor/utils"
@@ -12,6 +13,9 @@ func timeStampMillis() int {
 }
 
 func main() {
+
+	var wg sync.WaitGroup
+	wg.Add(2)
 
 	totalCount := 0
 	const MAX_CYCLES = 10
@@ -24,8 +28,9 @@ func main() {
 		fmt.Printf("sc:---%d.%4stime is %d\n", totalCount, " ", timeStampMillis())
 		if totalCount > MAX_CYCLES {
 			sc.Close()
+			wg.Done()
 		}
-	}, true)
+	}, true, true)
 
 	totalCount1 := 0
 	sc1.Start(func() {
@@ -33,7 +38,11 @@ func main() {
 		fmt.Printf("sc1:---%d.%4stime is %d\n", totalCount1, " ", timeStampMillis())
 		if totalCount1 > MAX_CYCLES {
 			sc1.Close()
+			wg.Done()
 		}
-	}, true)
+	}, true, false)
+
+	wg.Wait()
+	fmt.Println("All tasks completed.")
 
 }

@@ -14,7 +14,7 @@ func timeStampMillis() int {
 func main() {
 
 	totalCount := 0
-	const MAX_CYCLES = 5
+	const MAX_CYCLES = 10
 
 	sc := utils.NewTimedExecutor(2*time.Second, 500*time.Millisecond)
 
